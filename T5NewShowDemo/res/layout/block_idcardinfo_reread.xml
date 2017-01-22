@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <!-- 显示身份证信息的碎片 -->
+
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/head" />
+
+    <TextView
+        android:id="@+id/tv_person_info"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="5dp"
+        android:paddingEnd="10dp"
+        android:text="@string/unknow_idcardinfo"
+        android:textColor="@color/framework_font_tip"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/BTN_READIDCARD"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/nmnx_btn_selector"
+        android:text="读二代证"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
+
+</LinearLayout>

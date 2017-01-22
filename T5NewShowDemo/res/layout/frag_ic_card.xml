@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:padding="10dp"
+    android:orientation="vertical" >
+    <TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	   	>
+	    
+		<TableRow  
+		    android:gravity="center_vertical"
+		    >
+	        <TextView
+	            style="@style/ic_card_text_style"
+	            android:text="卡片类型:"
+	  />
+	        <Spinner 
+	            android:id="@+id/spinner_iccard_type"
+			    android:layout_weight="1"
+		        android:layout_width="0dip"
+		   
+	           style="@style/ic_card_edit_style"
+	           android:textSize="15sp"
+	            android:background="@drawable/rounded_editbtn_states"
+	        />
+	        
+	        <TextView
+	                 style="@style/ic_card_text_style"
+	                 android:layout_width="wrap_content"
+	            android:text="超时时间："
+	  />
+	        
+	        <EditText
+	            android:id="@+id/et_ic_timeout"
+	            android:inputType="number"
+	            android:text="20"
+			    android:layout_weight="1"
+			    android:layout_width="0dip"
+	            style="@style/ic_card_edit_style">
+	        </EditText>
+	        <TextView
+	                 style="@style/ic_card_text_style"
+	                   android:layout_width="wrap_content"
+	            android:text="标签编码："
+	       />
+	        
+	        <EditText
+	            android:id="@+id/et_ic_tag"
+	            android:text="A"
+			    android:layout_weight="1"
+			    android:layout_width="0dip"
+	             style="@style/ic_card_edit_style"
+
+	            android:gravity="left|center_vertical"
+	>	            
+	        </EditText>         
+	    </TableRow>
+	    </TableLayout>
+     <RelativeLayout 
+       style="@style/ic_card_layout_style"
+        android:visibility="gone"
+        >
+        <TextView 
+            android:id="@+id/tv_ReadList"
+            style="@style/ic_card_text_style"
+            android:text="应用列表:"
+            />
+        <EditText 
+            android:layout_toRightOf="@id/tv_ReadList"
+            android:id="@+id/EDIT_List"
+             style="@style/ic_card_edit_style"
+            />
+    </RelativeLayout>
+    
+     <RelativeLayout 
+       style="@style/ic_card_layout_style"
+       android:layout_weight="2"
+        >
+        <TextView 
+            android:id="@+id/tv_ARQC"
+            style="@style/ic_card_text_style"
+            android:text="ARQC:"
+            />
+        <EditText 
+            android:layout_toRightOf="@id/tv_ARQC"
+            android:id="@+id/EDIT_ARQC"
+             style="@style/ic_card_edit_style"
+             android:gravity="top"
+             android:padding="5dp"
+             android:layout_height="match_parent"
+            android:text = "P012000000000000Q012000000000000R003156S00820110324T00233U006165235W012310280000001"
+            />
+    </RelativeLayout>
+    
+     <ScrollView 
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         android:layout_weight="7"
+         
+         >
+         
+         <LinearLayout 
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:orientation="vertical"
+             >
+              <RelativeLayout 
+       style="@style/ic_card_layout_style1"
+        >
+        <TextView 
+            android:id="@+id/tv_ReadIcCard"
+            style="@style/ic_card_text_style"
+            android:text="@string/readIcCard"
+            />
+        <Button 
+            android:id="@+id/Btn_ReadInfo"
+            style="@style/ic_card_btn_style"
+            android:text="获取信息"
+            />
+        <TextView 
+            android:layout_toLeftOf="@id/Btn_ReadInfo"
+            android:layout_toRightOf="@id/tv_ReadIcCard"
+            android:id="@+id/EDIT_ReadInfo"
+             style="@style/ic_card_edit_style1"
+            />
+    </RelativeLayout>
+ <RelativeLayout 
+       style="@style/ic_card_layout_style1"
+        >
+        <TextView 
+            android:id="@+id/tv_ReadMagCard"
+            style="@style/ic_card_text_style"
+     		android:text="ARQC"
+            />
+        <Button 
+            android:id="@+id/Btn_ReadARQC"
+            style="@style/ic_card_btn_style"
+             android:text="@string/readARQC"
+            />
+        <TextView 
+            android:layout_toLeftOf="@id/Btn_ReadARQC"
+            android:layout_toRightOf="@id/tv_ReadMagCard"
+            android:id="@+id/EDIT_ReadARQC"
+             style="@style/ic_card_edit_style1"
+            />
+    </RelativeLayout>
+    
+ 
+  
+   <RelativeLayout 
+       style="@style/ic_card_layout_style1"
+        >
+        <TextView 
+            android:id="@+id/tv_GetDetail"
+            style="@style/ic_card_text_style"
+     		android:text="交易明细:"
+            />
+        <Button 
+            android:id="@+id/Btn_GetDetail"
+            style="@style/ic_card_btn_style"
+             android:text="获取明细:"
+            />
+        <TextView 
+            android:layout_toLeftOf="@id/Btn_GetDetail"
+            android:layout_toRightOf="@id/tv_GetDetail"
+            android:id="@+id/EDIT_GetDetail"
+             style="@style/ic_card_edit_style1"
+            />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+       style="@style/ic_card_layout_style1"
+       android:visibility="gone"
+        >
+        <TextView 
+            android:id="@+id/tv_RW"
+            style="@style/ic_card_text_style"
+     		android:text="读写能力:"
+            />
+        <Button 
+            android:id="@+id/Btn_RW"
+            style="@style/ic_card_btn_style"
+             android:text="获取能力"
+            />
+        <TextView 
+            android:layout_toLeftOf="@id/Btn_RW"
+            android:layout_toRightOf="@id/tv_RW"
+            android:id="@+id/EDIT_RW"
+             style="@style/ic_card_edit_style1"
+            />
+    </RelativeLayout>
+    
+             
+         </LinearLayout>
+     </ScrollView>
+   
+</LinearLayout>

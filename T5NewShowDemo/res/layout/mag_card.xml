@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout 	style="@style/msg_card_table_layout_style"
+             >
+
+            <TextView
+                style="@style/msg_card_text_style"
+                android:text="超时时间:" />
+
+            <EditText
+                android:id="@+id/et_msgTimeOut"
+                android:text="20"
+                android:inputType="number"
+                style="@style/msg_card_edit_style" 
+                android:focusable="true"
+               android:layout_height="wrap_content"
+                />
+            
+        </LinearLayout>
+        <LinearLayout 
+			style="@style/msg_card_table_layout_style"
+ >
+
+            <TextView
+                style="@style/msg_card_text_style"
+                android:text="磁道信息:" />
+
+            <TextView
+                android:id="@+id/et_track2"
+                style="@style/msg_card_edit_style" 
+                android:layout_height="wrap_content"
+                />
+"
+        </LinearLayout>
+
+        <LinearLayout 	style="@style/msg_card_table_layout_style"
+            android:visibility="gone"
+             >
+
+            <TextView
+                style="@style/msg_card_text_style"
+                android:text="磁道3：" />
+
+            <TextView
+                android:id="@+id/et_track3"
+                style="@style/msg_card_edit_style" />
+            
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_readMsgCard"
+        style="@style/bigButton"
+        android:layout_marginLeft="150dp"
+        android:text="读取信息" />
+
+</LinearLayout>

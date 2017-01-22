@@ -1,0 +1,139 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+
+    <RelativeLayout
+        android:id="@+id/login_Block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" >
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/logo" />
+
+        <EditText
+            android:id="@+id/account"
+            android:layout_width="320dp"
+            android:layout_height="55dp"
+            android:layout_below="@+id/logo"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/edit_white_back"
+            android:hint="请输入帐号"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="320dp"
+            android:layout_height="55dp"
+            android:layout_below="@+id/account"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_white_back"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/login_Btn"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/password"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/nmnx_btn_selector"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/connection_Block"
+        android:layout_width="850dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/login_Block"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/conn_block_back"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="通信方式  :"
+            android:textColor="#8b8c8e"
+            android:textSize="25sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_conn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/bt_conn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:button="@drawable/nmnx_rb_selector"
+                android:checked="true"
+                android:text="蓝牙"
+                android:textColor="#8b8c8e"
+                android:textSize="25sp" />
+
+            <RadioButton
+                android:id="@+id/hid_conn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:button="@drawable/nmnx_rb_selector"
+                android:text="USB HID"
+                android:textColor="#8b8c8e"
+                android:textSize="25sp" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="25dp"
+            android:background="#8b8c8e" />
+
+        <ImageView
+            android:id="@+id/connection_flag"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/not_conn_flag" />
+
+        <TextView
+            android:id="@+id/tvBTState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="未连接"
+            android:textColor="#8b8c8e"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/bt_conn_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="点击连接"
+            android:textColor="#fcab0e"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+</RelativeLayout>
