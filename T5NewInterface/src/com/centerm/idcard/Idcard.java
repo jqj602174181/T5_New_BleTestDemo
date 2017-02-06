@@ -48,7 +48,7 @@ public class Idcard extends FinancialBase {
 	private static boolean s_bCancel = false;
 	private final int TIMES_READCARD = 1;
 	private final int TRANSPROC_DEFAULT_TIMEOUT = 1;
-	private final int MAX_LEN = 1024;
+	private final int MAX_LEN = 1024*10;
 	private  final int MAX_DATA_LEN = 4096;
 	private String TAG = "IDCard";
 	private  static  boolean T5_device = true;//T5 …Ë±∏

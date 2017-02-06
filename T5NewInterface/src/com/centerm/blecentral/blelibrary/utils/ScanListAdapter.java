@@ -42,7 +42,12 @@ public final class ScanListAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		TextView textView=new TextView(mContext);
-		textView.setText(list.get(position).getDeviceName());
+		String deviceName = list.get(position).getDeviceName();
+		if(deviceName == null){
+			textView.setText("无设备名称");
+		}else{
+			textView.setText(list.get(position).getDeviceName());
+		}
 		textView.setTextSize(25);
 		textView.setTextColor(Color.BLACK); 
 		return textView;

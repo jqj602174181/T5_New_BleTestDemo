@@ -27,7 +27,6 @@ public abstract class FragmentBase extends Fragment implements OnClickListener{
 	protected char split = '\n';
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState,int layoutId) {
-		// TODO Auto-generated method stub
 		mainActivity = (MainActivity)getActivity();
 		View view = inflater.inflate(layoutId, null);
 		inputTime = getString(R.string.inputTime);
@@ -40,7 +39,7 @@ public abstract class FragmentBase extends Fragment implements OnClickListener{
 	protected boolean isTimeOut(EditText etTime)
 	{
 		if(etTime.getText().length()==0){
-			
+
 			CommonUtil.showTip(mainActivity, inputTime);
 			return false;
 		}
@@ -54,7 +53,7 @@ public abstract class FragmentBase extends Fragment implements OnClickListener{
 		} catch (NumberFormatException e) {
 			// TODO: handle exception
 		}
-		
+
 		return 20;
 	}
 	public abstract void setData(Object data);

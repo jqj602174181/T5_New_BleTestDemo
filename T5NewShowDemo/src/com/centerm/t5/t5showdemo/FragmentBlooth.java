@@ -167,8 +167,10 @@ CommenLibaryMessageOperator{
 				Toast.makeText(mContext, "ÇëÑ¡ÔñÀ¶ÑÀ£¡", Toast.LENGTH_SHORT).show();
 				return;
 			}
+			leScanner.stopScan();
 			mainActivity.startConnect(mac_value.getText().toString());
 			bluetoothOperator.checkBleConnect();
+			ble_lianjie.setEnabled(false);
 			break;
 		case R.id.ble_stop: //ble¶Ï¿ª
 			mainActivity.stopConnect();
@@ -307,7 +309,7 @@ CommenLibaryMessageOperator{
 	private Button btnStop;
 	private EditText etMsg;
 	private ListView listChat;
-	
+
 	private BluetoothOperator bluetoothOperator = BluetoothOperator.getInstance();
 
 	private Button ble_find, ble_lianjie, ble_stop;

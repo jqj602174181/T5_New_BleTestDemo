@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/id_card_text_style"
+            android:text="成功：" />
+
+        <TextView
+            android:id="@+id/test_success"
+            style="@style/id_card_edit_style1"
+            android:layout_width="100dp" >
+        </TextView>
+
+        <TextView
+            style="@style/id_card_text_style"
+            android:text="失败：" />
+
+        <TextView
+            android:id="@+id/test_fail"
+            style="@style/id_card_edit_style1"
+            android:layout_width="100dp" >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:weightSum="12" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/id_card_text_style"
+                android:text="卡号：" />
+
+            <TextView
+                android:id="@+id/test_card_no"
+                style="@style/id_card_edit_style1"
+                android:layout_width="350dp" >
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/id_card_table_layout_style"
+            android:layout_weight="1" >
+
+            <TextView
+                style="@style/id_card_text_style"
+                android:layout_gravity="top"
+                android:text="超时时间：" />
+
+            <EditText
+                android:id="@+id/et_IdTimeOut"
+                style="@style/id_card_edit_style"
+                android:focusable="true"
+                android:inputType="number"
+                android:text="20" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/readBtn"
+            style="@style/bigButton"
+            android:layout_height="0dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:text="开始测试" />
+    </LinearLayout>
+
+</LinearLayout>

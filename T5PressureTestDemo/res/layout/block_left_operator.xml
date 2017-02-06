@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back_menu"
+    android:orientation="vertical"
+    android:weightSum="9" >
+
+    <View
+        style="@style/lineStyle"
+        android:layout_marginTop="10dp" />
+
+    <LinearLayout
+        android:id="@+id/layout_connect"
+        style="@style/left_operator_layout_style"
+        android:background="@drawable/white" >
+
+        <ImageView
+            style="@style/left_operator_img_style"
+            android:src="@drawable/conn" />
+
+        <TextView
+            android:id="@+id/btn_connect"
+            style="@style/left_operator_btn_style"
+            android:text="@string/connect" />
+    </LinearLayout>
+
+    <View style="@style/lineStyle" />
+
+    <LinearLayout
+        android:id="@+id/layout_Test1"
+        style="@style/left_operator_layout_style" >
+
+        <ImageView
+            style="@style/left_operator_img_style"
+            android:src="@drawable/ic_card" />
+
+        <TextView
+            android:id="@+id/btn_IdCard"
+            style="@style/left_operator_btn_style"
+            android:text="压力测试（身份证）" />
+    </LinearLayout>
+    
+    <View style="@style/lineStyle" />
+
+    <LinearLayout
+        android:id="@+id/layout_Test2"
+        style="@style/left_operator_layout_style" >
+
+        <ImageView
+            style="@style/left_operator_img_style"
+            android:src="@drawable/ic_card" />
+
+        <TextView
+            android:id="@+id/btn_IcCard"
+            style="@style/left_operator_btn_style"
+            android:text="压力测试（IC卡）" />
+    </LinearLayout>
+</LinearLayout>

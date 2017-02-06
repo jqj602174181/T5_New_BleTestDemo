@@ -1,1 +1,3 @@
-T5 通用版新框架调度 pad端测试工具源码，无ble连接
+T5 通用版新框架调度 pad端测试工具源码，包含ble连接
+
+T5PressureTestDemo 压力测试工具

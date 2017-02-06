@@ -218,6 +218,10 @@ public class BluetoothOperator {
 	public void checkBleConnect(){
 		mThread.start();
 	}
+	
+	public void stopCheckBleConnect(){
+		mThread.interrupt();
+	}
 
 	public class CheckBleConnectThread extends Thread{
 

@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">"
+
+
+<LinearLayout 
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/exit_dialog_bk"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/exit_exitTextView"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:textSize="18sp"
+        android:textColor="#ffffffff"
+        android:gravity="center"
+        android:text="是否退出程序?" />
+
+    <LinearLayout 
+            android:layout_width="wrap_content"
+    		android:layout_height="50dp"
+    		android:layout_gravity="center_horizontal"
+    		android:orientation="horizontal"
+    		>
+      
+        
+           <Button
+            android:textColor="#ffffffff"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="@string/cancel"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:background="@drawable/exit_cancel_btn_click"
+            android:id="@+id/exit_cancel"
+            android:layout_marginRight = "10dp"
+            />
+             <Button
+            android:textColor="#ffffffff"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="@string/ok"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:background="@drawable/exit_ok_btn_click"
+            android:id="@+id/exit_ok"
+            />
+    </LinearLayout>
+        </LinearLayout>
+</RelativeLayout>

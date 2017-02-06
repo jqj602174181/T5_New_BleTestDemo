@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+    
+    	    	<LinearLayout
+    	    	    android:layout_width="match_parent"
+    	    	    android:layout_height="wrap_content"
+    	    	    android:layout_marginBottom="10dp"
+    	    	     android:orientation="horizontal"
+    	    	     android:id="@+id/passKeysRow" >
+	    	<TextView
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:gravity="right"
+	            android:text="密钥："
+	            android:textColor="#000000"
+	            android:textSize="25sp" 
+	            />        
+	    	<TextView
+	            android:id="@+id/tvPassKeys"
+	            android:layout_height="45dp"
+	            android:layout_width="match_parent"
+	            android:layout_marginRight="10dp"
+	            android:background="@drawable/rounded_edittext_states"
+	            android:gravity="left|center_vertical"
+	            android:text="88888888,11111111,22222222"
+	            android:textSize="25sp"
+	            />
+	    </LinearLayout>
+	    
+    	    		<LinearLayout
+    	    	    android:layout_width="match_parent"
+    	    	    android:layout_height="wrap_content"
+    	    	      android:layout_marginBottom="10dp"
+    	    	     android:orientation="horizontal"
+    	    	     android:id="@+id/passKeysRow" >
+	    	<TextView
+	            android:layout_width="150dp"
+	            android:layout_height="wrap_content"
+	            android:gravity="right"
+	            android:text="状态:："
+	            android:textColor="#000000"
+	            android:textSize="25sp" 
+	            />        
+	    	<TextView
+	            android:id="@+id/tvKeyState"
+	            android:layout_height="45dp"
+	            android:layout_width="match_parent"
+	            android:layout_marginRight="10dp"
+	            android:background="@drawable/rounded_edittext_states"
+	            android:gravity="left|center_vertical"
+	            android:textSize="25sp"
+	            />
+	    </LinearLayout>
+	     <Button
+	        android:id="@+id/bt_signKeyAffuse"
+	        style="@style/tabButton"
+	        android:layout_marginBottom="20dp"
+	        android:text="密钥灌注"
+	        android:layout_marginLeft="50dp" /> 
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+>
+
+
+		<TableRow android:padding="5dp" >
+	        <TextView
+	            android:layout_width="match_parent"
+	            android:gravity="right"
+	            android:text="加密方式："
+	            android:visibility="gone"
+	            android:textColor="#000000"
+	            android:textSize="25sp" />
+	        <Spinner 
+	            android:id="@+id/spinner_encrpt"
+			    android:layout_weight="1"
+		        android:layout_width="0dip"
+		        android:visibility="gone"
+	            android:layout_height="45dp"
+	            android:layout_marginBottom="5dp"
+	            android:layout_marginRight="10dp"
+	            android:background="@drawable/rounded_edittext_states"
+	            android:textSize="25sp"
+	            android:paddingRight="10dp"/>
+	        
+	        <TextView
+	            android:layout_width="150dp"
+	            android:gravity="right"
+	            android:text="超时时间："
+	            android:textColor="#000000"
+	            android:textSize="25sp" />
+	        
+	        <EditText
+	            android:id="@+id/timeout"
+	            android:inputType="number"
+	            android:text="20"
+			    android:layout_weight="1"
+			    android:layout_width="0dip"
+	            android:layout_height="45dp"
+	            android:layout_marginBottom="5dp"
+	            android:layout_marginRight="10dp"
+	            android:background="@drawable/rounded_edittext_states"
+	            android:gravity="left"
+	            android:scrollHorizontally="true"
+	            android:textSize="25sp">
+	        </EditText>         
+	    </TableRow>
+	
+	    
+		
+	    </TableLayout>
+        
+        <Button
+	        android:id="@+id/bt_elec_tag"
+	        style="@style/tabButton"
+	        android:text="读取签名"
+	        android:layout_marginLeft="50dp" /> 
+                
+       <RelativeLayout
+           	android:layout_marginTop="20dp"
+           	android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"   
+            android:layout_height="match_parent" >
+		<LinearLayout 
+		    android:id="@+id/linear"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:gravity="center_vertical"
+		    android:orientation="horizontal"
+		    >
+		    <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 签名数据文件："
+                android:textSize="25sp" 
+                android:textColor="@android:color/black"/>
+		    
+		     <EditText
+	            android:id="@+id/et_path"
+			    android:layout_width="match_parent"
+	            android:layout_height="45dp"
+	            android:layout_marginRight="10dp"
+	            android:layout_marginLeft="10dp"
+	            android:background="@drawable/rounded_edittext_states"
+	            android:gravity="left"
+	            android:textSize="25sp"/>
+		</LinearLayout>
+            
+            <ImageView
+                android:id="@+id/iv_img" 
+                android:background="@drawable/img_bk"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:visibility="gone"
+              	android:layout_centerHorizontal="true"
+                android:layout_below="@id/linear"/>
+        
+        </RelativeLayout>
+
+</LinearLayout>

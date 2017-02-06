@@ -20,7 +20,7 @@ public abstract class FinancialBase {
 	protected ReadThread readThread;
 	protected SendThread sendThread;
 
-	protected final int packLength = 1024;
+	protected final int packLength = 1024*10;
 	public abstract Object getTestData(Object object);
 	protected abstract int readData(byte [] data,int len,int timeOut);
 	protected abstract int writeData(byte[] data,int len);
@@ -56,6 +56,8 @@ public abstract class FinancialBase {
 				}
 			}
 			return realReadedLength;
+		}else if(CommService.type==DeviceOperatorData.BLE){
+			return byResLength;
 		}
 
 		return byResLength;
@@ -105,10 +107,11 @@ public abstract class FinancialBase {
 			timeout = time * 1000;
 		}
 		int length= CommService.getInstance().readData(readData,timeout );
-		// Log.e("ReadDataFromTransPort", "length = "+ length);
+		//		Log.e("ReadDataFromTransPort", "length = "+ length);
 		if(length> 0)
 		{
-			// Log.e("ReadDataFromTransPort", "readData: "+ StringUtil.bytesToHexString(readData) );
+			//			Log.e("ReadDataFromTransPort", "readData: "+ new String(readData) );
+			//			Log.e("ReadDataFromTransPort", "readData: "+ StringUtil.bytesToHexString(readData) );
 		}
 		return getRealReadedLength(readData, length);
 	}
@@ -322,17 +325,13 @@ public abstract class FinancialBase {
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else{
 				isSendLock = false;
 			}
 
-
 			SendThreadRun();
-
-
 
 			if(!isSendQuit){
 				sendEnd();
@@ -349,8 +348,6 @@ public abstract class FinancialBase {
 
 		@Override
 		public void interrupt() {
-			// TODO Auto-generated method stub
-
 			isSendThreadStop = true;
 			super.interrupt();
 		}
@@ -368,8 +365,6 @@ public abstract class FinancialBase {
 	protected void SendThreadRun()
 	{
 		byte data[] = new byte[packLength];
-
-
 		while (!isSendThreadStop) {
 			if(isSendLock){
 				//	writeLock();
@@ -377,26 +372,21 @@ public abstract class FinancialBase {
 
 			}
 
-			int len =readData(data, data.length,10);
-
+			int len =readData(data, data.length, 10);
 
 			if(len==0){
 				//break;
-				//TODO:
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				continue;
 			}
 			if(!isSendLock){
-
 				//		readUnlock();
 				isSendLock = true;
 			}
-			//	
 
 			if(len>0){	
 				if(len==3&&data[0]==0x02&&data[1]==(byte)0x0f&&data[2]==0x03){	//有从jni中读到数据，要往通信接口发送
@@ -410,9 +400,7 @@ public abstract class FinancialBase {
 					sendCommData(data, len);
 				}
 			}
-
 		}
-
 	}
 
 	protected void sendEnd()
@@ -428,25 +416,21 @@ public abstract class FinancialBase {
 		byte[] data = new byte[packLength];
 		while(!isReadThreadStop)
 		{
-
 			int len = readCommData(data,10);
 			if(len==-1){
 				return;
 			}
 
-
 			if(len>0){
-
 				int l = writeData(data, len);//从通信接口读到数据,要写jni中
-
 			}
 		}
 		//Log.e("quit","read quit");
 	}
+
 	protected void start()
 
 	{
-
 		//Log.e("Dev","start in FinancialBase" );
 		if(sendThread!=null){
 			sendThread.quitThread();
@@ -493,7 +477,6 @@ public abstract class FinancialBase {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(time==0){
@@ -501,5 +484,5 @@ public abstract class FinancialBase {
 			}
 		}
 	}
-	
+
 }

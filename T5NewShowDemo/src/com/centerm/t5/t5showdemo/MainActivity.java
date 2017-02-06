@@ -483,6 +483,9 @@ public class MainActivity extends Activity implements View.OnClickListener, OnMe
 	}
 
 	public void startConnect(String mac){
+		if(waitDialog == null){
+			waitDialog = new WaitDialog(this, false, this);
+		}
 		bleClient.startConnect(mac);
 	}
 

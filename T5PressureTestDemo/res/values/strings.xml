@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">T5压力测试工具</string>
+    <string name="app_name_ZhiGao">志高建行测试程序</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="macAddr3">22:22:00:AA:58:57</string>
+    <string name="macAddr1">22:22:18:17:C4:ED</string>
+    <string name="macAddr2">22:22:AB:E0:89:39</string>
+    <string name="macAddr4">22:22:F9:5A:23:3B</string>
+    <string name="macAddr">22:22:53:20:4A:4D</string>
+    <string name="key">密码键盘</string>
+    <string name="icCard">ic卡</string>
+    <string name="idCard">身份证</string>
+    <string name="zhiwenyi">指纹仪</string>
+    <string name="MsgCard">磁卡</string>
+    <string name="connect">通信连接</string>
+    <string name="handWrite">电子签名</string>
+    <string name="mingWen">密码:</string>
+    <string name="readPassword">读取密码</string>
+    <string name="keyAffusePin">密钥灌注</string>
+    <string name="readMagCard">射频卡:</string>
+    <string name="readARQC">获取ARQC</string>
+    <string name="readIcCard">IC卡信息:</string>
+    <string name="readCard">读卡</string>
+    <string name="lenNoNull">长度不能为空</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="checkBluetooth">请先检测是否有蓝牙</string>
+    <string name="bluetoothNoConnect">蓝牙未连接</string>
+    <string name="readWait">正在读取数据,请稍候...</string>
+    <string name="inputTime">请输入时间</string>
+    <string name="miyao1">密钥1:</string>
+    <string name="miyao2">密钥2:</string>
+    <string name="miyao3">密钥3:</string>
+    
+    <string name="unknow_idcardinfo">姓名：未知　　拼音：未知\n性别：未知　　民族：未知　　出生日期：未知\n发证机关：未知　　\n证件到期日：未知\n身份证号：未知\n地址：未知</string>
+
+</resources>
