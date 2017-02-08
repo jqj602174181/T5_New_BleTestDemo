@@ -20,7 +20,7 @@ public abstract class FinancialBase {
 	protected ReadThread readThread;
 	protected SendThread sendThread;
 
-	protected final int packLength = 1024*10;
+	protected final int packLength = 1024*50;
 	public abstract Object getTestData(Object object);
 	protected abstract int readData(byte [] data,int len,int timeOut);
 	protected abstract int writeData(byte[] data,int len);

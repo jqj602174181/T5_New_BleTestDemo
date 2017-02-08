@@ -165,7 +165,7 @@ public final class BLEClient implements DeviceIntf{
 					Log.e(TAG, "Discover Services failed");
 					return;
 				}
-				bluetoothGatt.requestMtu(500);
+				bluetoothGatt.requestMtu(150);
 				BluetoothGattService service = bluetoothGatt.getService(UUID.fromString(BLEProfile.UUID_SERVICE));
 				if (service != null) {
 					BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID.fromString(BLEProfile.UUID_CHARACTERISTIC));
@@ -333,7 +333,7 @@ public final class BLEClient implements DeviceIntf{
 		//		}
 
 		//循环等待获取数据,确保数据收完
-		int time = timeOut;
+		//		int time = timeOut;
 		while(mBuffer==null){
 			//			if(mBuffer != null){
 			//				break;

@@ -18,7 +18,6 @@ import android.util.Log;
 
 public class Device_BT implements DeviceIntf
 {
-
 	private BluetoothDevice remotedev = null;//‘∂≥Ã¿∂—¿…Ë±∏
 	private BluetoothSocket sock = null;
 	private OutputStream out = null;
@@ -27,7 +26,6 @@ public class Device_BT implements DeviceIntf
 	private  boolean isConnect = false;
 	protected boolean isQuitRead = false;
 	private boolean isExit = false;
-
 
 	public Device_BT()
 	{
@@ -377,15 +375,11 @@ public class Device_BT implements DeviceIntf
 					return len;
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				//		 closeBluetoothDevice();
 			}catch (NullPointerException e) {
-				// TODO: handle exception
 			}
 		}
-
-
 		return len;
 	}
 
@@ -487,8 +481,6 @@ public class Device_BT implements DeviceIntf
 
 	@Override
 	public int readData2(byte[] buffer, int timeOut) {
-		// TODO Auto-generated method stub
-		return 0;
+		return readData(buffer, timeOut);
 	}
-
 }

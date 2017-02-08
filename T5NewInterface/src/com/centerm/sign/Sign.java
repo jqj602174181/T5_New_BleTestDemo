@@ -18,38 +18,38 @@ public class Sign extends FinancialBase {
 	private byte[] picData;
 
 	private Integer signStyle = 0;
-    private final static String CONFIG_FILE_PATH = "/mnt/sdcard/Sign_Dncrypt.png";//保存解密后的数据
-    
-    private final static String SING_DATA_FILE = "/mnt/sdcard/Sign_Dncrypt.xml";
-    
-    private final static String SING_XML_PATH = "/mnt/sdcard/hw.xml";//读取签名数据文件
-    private final static String SING_PNG_PATH = "/mnt/sdcard/hw.png";
-    		
-   
-    private final static String TAG ="Sign";
+	private final static String CONFIG_FILE_PATH = "/mnt/sdcard/Sign_Dncrypt.png";//保存解密后的数据
+
+	private final static String SING_DATA_FILE = "/mnt/sdcard/Sign_Dncrypt.xml";
+
+	private final static String SING_XML_PATH = "/mnt/sdcard/hw.xml";//读取签名数据文件
+	private final static String SING_PNG_PATH = "/mnt/sdcard/hw.png";
+
+
+	private final static String TAG ="Sign";
 	boolean isOver = false;
 
 	private boolean isSureTimeout = false;
-	
+
 	private String sTimeOut = "[2SETTIMEOUT";
 	private SignFile picSignFile;
 	private SignFile xmlSignFile;
 	private int timeOut = 20;
 	private final int MAX_LEN = 1024;
 	private int waitNumber = 5;
-	
+
 	private byte[] picSize;//签名明文的png实际长度
 	private byte[] xmlSize;//签名明文的xml实际长度
-	
+
 	public Sign()
 	{
-		
+
 		//创建两个对象用于保存xml ,以及png图片
 		picSignFile = new SignFile(CONFIG_FILE_PATH,true);
 		xmlSignFile = new SignFile(SING_DATA_FILE,true);
 	}
-	
-	
+
+
 	//读取返回值
 	private void readMoreData()
 	{
@@ -61,21 +61,24 @@ public class Sign extends FinancialBase {
 		}
 		byte[] readData = new byte[packLength];
 		while (true) {
-			int len = readCommData(readData,waitTimeOut);
+			while(CommService.getInstance().isWork()){ //针对ble添加
+
+			}
+			int len = ReadDataFromTransPort(readData,waitTimeOut);
 			int realLen = getRealReadedLength(readData, len);
 			if(isSuccess(realLen, readData)){
-				
+
 				break;
 			}else{
-			
+
 				break;
 			}
-			
+
 		}
 	}
-	
-	
-	
+
+
+
 	private boolean isSendValueSuccess(byte[] value,int index)
 	{
 		String sec = Integer.toHexString(index);
@@ -88,7 +91,7 @@ public class Sign extends FinancialBase {
 		System.arraycopy(sec.getBytes(), 0, sendData, key.length()+2, sec.length());
 		sendData[key.length()+2+sec.length()] =(byte)('|'); 
 		System.arraycopy(value, 0, sendData, key.length()+3+sec.length(), value.length);
-		
+
 		String str = new String(sendData,0,sendData.length);
 		//Log.e("sec", " str is "+str);
 		sendCommData(sendData, sendData.length);
@@ -101,11 +104,14 @@ public class Sign extends FinancialBase {
 		}
 		int time = waitNumber;
 		while (true) {
-			int len = readCommData(readData,waitTimeOut);
+			while(CommService.getInstance().isWork()){ //针对ble添加
+
+			}
+			int len = ReadDataFromTransPort(readData,waitTimeOut);
 			int realLen = getRealReadedLength(readData, len);
-			
+
 			if(isSuccess(realLen, readData)){
-			
+
 				return true;
 			}else{
 				if(time==0){
@@ -120,39 +126,39 @@ public class Sign extends FinancialBase {
 				time--;
 				continue;
 			}
-			
+
 		}
 		return false;
 	}
 
-	
 
-   public int readData(byte[] data, int len, int timeOut) {
+
+	public int readData(byte[] data, int len, int timeOut) {
 
 		synchronized(signStyle){
 			if(signStyle==1){
-				
+
 				System.arraycopy(picData,0, data, 0,picData.length);
 				signStyle=-1;
 				return picData.length;
 			}
 
-		
+
 			return -1;
 		}
 	}
 
-   
-   /**截取数据
-    * 
-    * @param res[in]
-    * @param resLen[in]
-    * @param begin[in]
-    * @param end[in]
-    * @param outData[out]获得截取的数据长度
-    * @return 截取到的数据长度
-    */
-   private int separateSignData(byte[] res, int resLen, byte begin, byte end, byte[] outData)
+
+	/**截取数据
+	 * 
+	 * @param res[in]
+	 * @param resLen[in]
+	 * @param begin[in]
+	 * @param end[in]
+	 * @param outData[out]获得截取的数据长度
+	 * @return 截取到的数据长度
+	 */
+	private int separateSignData(byte[] res, int resLen, byte begin, byte end, byte[] outData)
 	{
 		boolean mark = false;
 		int index = 0;
@@ -177,12 +183,12 @@ public class Sign extends FinancialBase {
 		return index;
 
 	}
-   
-   
-   /***
-    * 构造查询指令
-    * */
-   
+
+
+	/***
+	 * 构造查询指令
+	 * */
+
 
 	/**查询签名数据
 	 * 
@@ -210,21 +216,23 @@ public class Sign extends FinancialBase {
 
 		byte[] byCmdRes = new byte[MAX_LEN];
 		sendCommData( byReqData, nReqLen);
-		
+
 		try {
-			Thread.sleep(100);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		nRet = readCommData( byCmdRes, timeout);
-		
+		while(CommService.getInstance().isWork()){ //针对ble添加
+
+		}
+		nRet = ReadDataFromTransPort( byCmdRes, timeout);
+
 		//Log.e(TAG,"findSignData: byReqData"+ StringUtil.bytesToHexString(byReqData)) ;
 		//Log.e(TAG,"findSignData: nRet"+nRet);
 		if ( nRet > 0 )
 		{
 			//Log.e(TAG,"findSignData: byCmdRes"+ StringUtil.bytesToHexString(byCmdRes)  );
-		
+
 		}// 设置通信错误码
 		if (nRet <= 0)
 		{  
@@ -235,25 +243,24 @@ public class Sign extends FinancialBase {
 
 		if ( byCmdRes[0]==0x02&&byCmdRes[1] == 0x55&& byCmdRes[2]==0x03)
 		{
-			
+
 			nRet = SignFile.COMMERROR;
 			return nRet;
 		}
 		else
 		{
-		    nRet = separateSignData(byCmdRes, byCmdRes.length, (byte) 0x02,
-				(byte) 0x7C, signSize);
-		    byte[] MD5 = new byte[MAX_LEN];
-		    separateSignData(byCmdRes, byCmdRes.length, (byte) 0x7C,
+			nRet = separateSignData(byCmdRes, byCmdRes.length, (byte) 0x02,
+					(byte) 0x7C, signSize);
+			byte[] MD5 = new byte[MAX_LEN];
+			separateSignData(byCmdRes, byCmdRes.length, (byte) 0x7C,
 					(byte) 0x03, MD5);
-            //Log.e(TAG, "findSignData: MD5=" + StringUtil.AsciiToString(MD5) );
+			//Log.e(TAG, "findSignData: MD5=" + StringUtil.AsciiToString(MD5) );
 		}
-		
 
 		return nRet;
 	}
 
-	
+
 
 	/**
 	 * 获取签名数据命令
@@ -267,12 +274,12 @@ public class Sign extends FinancialBase {
 	private int getSignDataCmd(byte[] path, int ioffset, int ilength, int allLength, byte[] szCmd)
 	{
 		int nReqLen = 0;
-		
+
 		//组合指令
 		byte[] offset = StringUtil.StringToHexAscii(String.valueOf(ioffset));//起始位置
 		if ((ioffset + ilength) > allLength)
 		{
-            ilength = allLength - ioffset;
+			ilength = allLength - ioffset;
 		}
 		byte[] length = StringUtil.StringToHexAscii(String.valueOf(ilength));//要读取的长度
 
@@ -306,43 +313,52 @@ public class Sign extends FinancialBase {
 		// 结尾
 		szCmd[nReqLen] = 0x03;
 		nReqLen += 1;
-	   
+
 		return nReqLen;
 	}
-   
-  
-	
-	
-   /**
-    * 查询以及获取数据
-    * 
-    * */  
-   private String[]  getFinancialData(int timeOut) {
 
-		
-	   //获取png数据
+
+
+
+	/**
+	 * 查询以及获取数据
+	 * 
+	 * */  
+	private String[]  getFinancialData(int timeOut) {
+
+
+		//获取png数据
 		int length = 0;
 		byte[] readData = new byte[packLength]; 
 		int fileSize = 0;
 		int time = waitNumber;
 		byte[] png_path = StringUtil.StringToHexAscii(SING_PNG_PATH);
-    
-		
+
+
 		//(1)查询数据
 		length = findSignData(png_path, timeOut, readData);
 		if(length < 0)//查询失败
 		{
-			 return picSignFile.getError(length);
+			return picSignFile.getError(length);
 		}
 		byte[] temp1 = new byte[length];
 		System.arraycopy(readData, 0, temp1 , 0, length);
 		//Log.e( TAG, "getFinancialData: temp1" + StringUtil.bytesToHexString(temp1));
 		picSignFile.writeData(temp1, length);
-		
-		
+
+
 		int offset = 0;
 		int szCmdLen = 0;
-		int ilenth  = 512;//每次读取的数据长度
+		int ilenth  = 512; //每次读取的数据长度
+		//hid 与传统蓝牙
+		if(CommService.type==DeviceOperatorData.HID || CommService.type==DeviceOperatorData.BLUETOOTH){
+			ilenth = 512;
+		}else if(CommService.type==DeviceOperatorData.BLE){ //ble一次接收字节
+			ilenth = 1024*50;
+		}else{
+			ilenth = 512;
+		}
+
 		byte[] szCmd = new byte[ MAX_LEN ];
 		fileSize = picSignFile.fileLen;
 		//Log.e(TAG, "picSignFile: fileLen= "+ fileSize);
@@ -352,11 +368,14 @@ public class Sign extends FinancialBase {
 			//Log.e ( TAG, "picSignFile: offset="+ offset);
 			szCmdLen = getSignDataCmd(png_path, offset,ilenth, fileSize, szCmd );//构造指令
 			sendCommData(szCmd, szCmdLen);
-		//	//Log.e( TAG, "getpicSignFile: in while szCmd"+ StringUtil.bytesToHexString(szCmd));
-			length =readCommData(readData, timeOut);
+			//	//Log.e( TAG, "getpicSignFile: in while szCmd"+ StringUtil.bytesToHexString(szCmd));
+			while(CommService.getInstance().isWork()){ //针对ble添加
+
+			}
+			length =ReadDataFromTransPort(readData, timeOut);
 			//Log.e( TAG, "getpicSignFile: in while: realen=" + length);
-		
-			
+
+
 			if(length>0)
 			{
 				time = waitNumber;
@@ -368,7 +387,7 @@ public class Sign extends FinancialBase {
 					break;
 				}
 				offset += length;//偏移量
-			
+
 			}
 			else
 			{
@@ -381,52 +400,50 @@ public class Sign extends FinancialBase {
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-			}
-				
-			time--;
-			
+				}
+
+				time--;
+
 				//break;
 			}
 		}
-		
+
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(100);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		
+
 		//读取xml数据
 		if(isOver){	
 			png_path = StringUtil.StringToHexAscii(SING_XML_PATH);
 			//查询数据
-		
+
 			length = findSignData(png_path, timeOut, readData);
 			if(length < 0)//查询失败
 			{
-				 return xmlSignFile.getError(length);
+				return xmlSignFile.getError(length);
 			}
 			byte[] temp2 = new byte[length];
 			System.arraycopy( readData, 0, temp2, 0, length);
 			xmlSignFile.writeData(temp2, length);
-			
-			
+
+
 			offset = 0;
 			fileSize = xmlSignFile.fileLen;
 			//Log.e(TAG, "xmlSignFile: fileLen= "+ fileSize);
-			
+
 			while(true)
 			{
-				
+
 				szCmdLen = getSignDataCmd(png_path, offset,ilenth, fileSize, szCmd );//构造指令
 				sendCommData(szCmd, szCmdLen);
-			//	Log.e( TAG, "xmlSignFile: in while szCmd"+ StringUtil.bytesToHexString(szCmd));
-				length =readCommData(readData, timeOut);
+				//	Log.e( TAG, "xmlSignFile: in while szCmd"+ StringUtil.bytesToHexString(szCmd));
+				while(CommService.getInstance().isWork()){ //针对ble添加
+
+				}
+				length =ReadDataFromTransPort(readData, timeOut);
 				//Log.e( TAG, "xmlSignFile: in while: realen=" + length);
 				if(length>0){
 					time = waitNumber;
@@ -435,7 +452,7 @@ public class Sign extends FinancialBase {
 						isOver = true;
 						break;
 					}
-					
+
 					offset += length;
 				}
 				else{
@@ -453,9 +470,9 @@ public class Sign extends FinancialBase {
 				}
 			}
 		}
-		
-		
-		
+
+
+
 		else{
 			return picSignFile.getError();
 		}
@@ -472,8 +489,8 @@ public class Sign extends FinancialBase {
 		}
 
 	}
-	
-	
+
+
 
 	//	获取超时指令
 	private byte[] getTimeOut(String time)
@@ -488,32 +505,32 @@ public class Sign extends FinancialBase {
 		timeOutData[timeOutData.length-1]=0x03;
 		return timeOutData;
 	}
-	
-	
 
-	
+
+
+
 	/**
-	* 要求客户进行签名，并获取签名数据
-	* 
-	* @param strTimeout 超时间隔，默认为30秒
-	*/
+	 * 要求客户进行签名，并获取签名数据
+	 * 
+	 * @param strTimeout 超时间隔，默认为30秒
+	 */
 	public String[] getSignature(String strTimeout)
 	{
-		
-//		readMoreData();
+
+		//		readMoreData();
 		picSignFile.init();
 		xmlSignFile.init();
 		isSureTimeout = false;
 		isOver = false;
-		
+
 		//时间参数错误则返回失败
 		int time = getTime(strTimeout);
 		if(time==-1){
 			return getParamErr();
 		}
-		
-		
-		
+
+
+
 		int readtime = 2;
 		int waitTimeOut = time;
 		//根据不同的通讯方式设置超时时间
@@ -523,46 +540,49 @@ public class Sign extends FinancialBase {
 		}else if(CommService.type==DeviceOperatorData.BLUETOOTH){
 			waitTimeOut = 1000*(time+2);
 			readtime = 1000*(readtime+2) ;
-			
+
 		}
 		timeOut = time;
-		
-	
+
+
 		String[] strList = null;
-		
+
 		//发送打开手写签名超时以及启动指令
 		byte openData[] = getFinancialOpenCommad();
 		sendCommData(openData, openData.length);
 		byte[] readData = new byte[packLength];
-		int length= readCommData(readData,waitTimeOut);
-		
+		while(CommService.getInstance().isWork()){ //针对ble添加
+
+		}
+		int length= ReadDataFromTransPort(readData,waitTimeOut);
+
 		byte[] tempDate = new byte[length];
 		System.arraycopy(readData, 0, tempDate,0, length);
 		int len = getRealReadedLength(readData, length);
-		
-	     //判断启动手写签名是否启动成功，若失败则返回错误描述
+
+		//判断启动手写签名是否启动成功，若失败则返回错误描述
 		if(!isSuccess(len, readData)){
 			//Log.e(TAG, "getSignature: start signfail");
 			picSignFile.setFileStyle(SignFile.TIMEOUT);
 			return picSignFile.getError();
 		}
-	    
+
 		//time = waitTimeOut;
 		strList = getFinancialData(readtime);	
-	
-		
+
+
 		return strList;
 	}
-	
-	
-	
-	
+
+
+
+
 	public String[] keyAffuse (String[] keys)
 	{
 		if(keys==null){
 			return SignFile.getError(SignFile.ParamErr);
 		}
-	
+
 		readMoreData();
 		boolean is = false;
 		for(int i=0;i<keys.length;i++){
@@ -573,10 +593,10 @@ public class Sign extends FinancialBase {
 				is = false;
 				break;
 			}
-			
+
 		}
-		
-	
+
+
 		if(is){//成功
 			String [] str = new String[1];
 			str[0]=sRight;
@@ -585,30 +605,30 @@ public class Sign extends FinancialBase {
 			return SignFile.getError(SignFile.ParamErr);
 		}
 	}
-	
 
-	
+
+
 	@Override
 	public Object getTestData(Object object) {
 		// TODO Auto-generated method stub
 		SignData signData = (SignData)object;
-		
+
 		if(signData.style==1){
 			return getSignature(signData.timeOut);
 		}else if(signData.style==2){
 			return keyAffuse(signData.keyAffuseList);
 		}
 		return SignFile.getError(SignFile.ParamErr);
-		
+
 	}
-	
+
 	@Override
 	protected int writeData(byte[] data, int len) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
+
 
 	@Override
 	public byte[] getFinancialOpenCommad() {
@@ -629,15 +649,15 @@ public class Sign extends FinancialBase {
 		//return super.getFinancialCloseCommad();
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * 查询以及获取签名数据 :旧指令
 	 * */
-/*	private String[]  getFinancialData(int timeOut) {
+	/*	private String[]  getFinancialData(int timeOut) {
 
-	
-		
+
+
 		////读取png 文件数据
 		byte [] picData = new byte[pic.length()+1];
 		picData[0]=(byte)0x1B;
@@ -645,10 +665,10 @@ public class Sign extends FinancialBase {
 		sendCommData(picData, picData.length);
 		int length = 0;
 		byte[] readData = new byte[packLength]; 
-		
+
 		int time = waitNumber;
-		
-		
+
+
 		while(true)
 		{
 			length =readCommData(readData, timeOut);
@@ -660,7 +680,7 @@ public class Sign extends FinancialBase {
 					break;
 				}
 			}
-			
+
 			else
 			{
 				if(time==0){
@@ -673,28 +693,28 @@ public class Sign extends FinancialBase {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 			}
-				
+
 			time--;
-			
+
 				//break;
 			}
 		}
-		
+
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		//读取xml数据
 		if(isOver){
 			byte [] xmlData = new byte[xml.length()+1];
 			xmlData[0]=(byte)0x1B;
 			System.arraycopy(xml.getBytes(),0, xmlData, 1, xml.length());
 			sendCommData(xmlData, xmlData.length);
-			
-			
+
+
 			while(true)
 			{
 				length =readCommData(readData, timeOut);
@@ -719,9 +739,9 @@ public class Sign extends FinancialBase {
 				}
 			}
 		}
-		
-		
-		
+
+
+
 		else{
 			return picSignFile.getError();
 		}
@@ -738,7 +758,7 @@ public class Sign extends FinancialBase {
 		}
 
 	}*/
-   
-	
-	
+
+
+
 }

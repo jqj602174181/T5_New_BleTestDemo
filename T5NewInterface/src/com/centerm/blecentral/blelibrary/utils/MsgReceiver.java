@@ -39,10 +39,10 @@ public final class MsgReceiver {
 		} else {
 			nowLength += bytes.length;
 			totalBytes = MsgCommonUtil.merge(totalBytes, bytes);
-			Log.e("MsgReceiver:", "nowLength：" + nowLength);
+			//			Log.e("MsgReceiver:", "nowLength：" + nowLength);
 			if (nowLength >= length) {
 				receiver.receiveData(Arrays.copyOf(totalBytes, totalBytes.length));
-				Log.e("MsgReceiver:", "长度：" + totalBytes.length);
+				Log.e("MsgReceiver:", "收到数据字节数：" + totalBytes.length);
 				init();
 			}
 		}

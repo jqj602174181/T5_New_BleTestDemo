@@ -20,14 +20,14 @@ import android.util.Log;
 public class Device_HID implements DeviceIntf
 {
 	private String TAG = "hid";
-	
+
 	private static final String tg="dv";
 	public static final int VendorID = 0x2B46; //T5 打开调试18D1 关闭调试2B46
-//	public static final int ProductID = 0xBB01;//T5 打开调试D003 关闭调试BC01 //CR200：BE01
+	//	public static final int ProductID = 0xBB01;//T5 打开调试D003 关闭调试BC01 //CR200：BE01
 	public static final int ProductID = 0xBE01;//T5 打开调试D003 关闭调试BC01 //CR200：BE01
-//	public static final int VendorID = 0x18D1; //T5 打开调试18D1 关闭调试2B46
-//	public static final int VendorID = 0x18D1; //T5 打开调试18D1 关闭调试2B46
-//	public static final int ProductID = 0xD003;//T5 打开调试D003 关闭调试BC01 //CR200：BE01
+	//	public static final int VendorID = 0x18D1; //T5 打开调试18D1 关闭调试2B46
+	//	public static final int VendorID = 0x18D1; //T5 打开调试18D1 关闭调试2B46
+	//	public static final int ProductID = 0xD003;//T5 打开调试D003 关闭调试BC01 //CR200：BE01
 	private static final String ACTION_USB_PERMISSION ="com.android.example.USB_PERMISSION";
 	private UsbManager usbManager;
 	private UsbDevice usbDevice;
@@ -38,16 +38,16 @@ public class Device_HID implements DeviceIntf
 	private Context context;
 	protected boolean isQuitRead;
 	private int timeOut = 2;
-	
+
 	private UsbReceiver usbReceiver;
 	public Device_HID() {
-	//	this.context = context;
+		//	this.context = context;
 		usbReceiver = null;
-		
+
 	}
 
-	
-	
+
+
 	private class UsbReceiver extends BroadcastReceiver{
 
 		private Context context;
@@ -60,21 +60,21 @@ public class Device_HID implements DeviceIntf
 		@Override
 		public void onReceive(Context arg0, Intent intent) {
 			// TODO Auto-generated method stub
-			 String action = intent.getAction();
-		       //Log.e(TAG,"action is "+action);
-		       if (ACTION_USB_PERMISSION.equals(action)) {
-		           synchronized (this) {
-		        	   UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-		               if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-		            	   usbDevice = device;
-		               } 
-		               else {
-		                  // Log.d(TAG, "permission denied for device " + usbDevice);
-		               }
-		           }
-		       }
+			String action = intent.getAction();
+			//Log.e(TAG,"action is "+action);
+			if (ACTION_USB_PERMISSION.equals(action)) {
+				synchronized (this) {
+					UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+					if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+						usbDevice = device;
+					} 
+					else {
+						// Log.d(TAG, "permission denied for device " + usbDevice);
+					}
+				}
+			}
 		}
-		
+
 		public void registBroadcast()
 		{
 			//Log.e("br","recvicer is regiths is "+isRegist);
@@ -84,7 +84,7 @@ public class Device_HID implements DeviceIntf
 				isRegist  = true;
 			}
 		}
-		
+
 		public void unregistBroadcast()
 		{
 			if(isRegist){
@@ -92,24 +92,24 @@ public class Device_HID implements DeviceIntf
 				context.unregisterReceiver(this);
 			}
 		}
-		
+
 	}
-	
+
 	@Override
 	public boolean openDevice(Context context,String addr) {
 		// TODO Auto-generated method stub
-		
+
 		Log.e("Dev", "openDevice:Device_HID");
 		this.context = context;
 		if(usbReceiver==null){
-		//
-		//	usbReceiver = null;
+			//
+			//	usbReceiver = null;
 			usbReceiver = new UsbReceiver(context);
-			
+
 		}else{
 			usbReceiver.unregistBroadcast();
 		}
-		
+
 		usbManager = (UsbManager)context.getSystemService(Context.USB_SERVICE);
 		int ret = 0;
 		ret = findUsbDevice();
@@ -125,8 +125,8 @@ public class Device_HID implements DeviceIntf
 			return false;
 		}
 
-		
-		
+
+
 		isConnected = true;
 		return true;
 	}
@@ -188,12 +188,12 @@ public class Device_HID implements DeviceIntf
 	public boolean connectDevice() {
 		// TODO Auto-generated method stub
 		int ret = connectHidDevice();
-	    Log.i(TAG, "3. connectDevice ： " + ret);
+		Log.i(TAG, "3. connectDevice ： " + ret);
 		if (ret != 0)
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -208,7 +208,7 @@ public class Device_HID implements DeviceIntf
 			deviceConnection.close();
 			isConnected = false;
 		}
-	
+
 	}
 	/* 查找USB设备 */
 	private int findUsbDevice()
@@ -255,7 +255,7 @@ public class Device_HID implements DeviceIntf
 		{
 			return ResultCode.USB_FIND_DEVICE_FAIL;
 		}
-		
+
 		for (int i = 0; i < usbDevice.getInterfaceCount(); i++)
 		{
 			// 获取设备接口，一般都是一个接口，你可以打印getInterfaceCount()方法查看接
@@ -301,23 +301,23 @@ public class Device_HID implements DeviceIntf
 			//Log.e(TAG, "获取设备输入端点失败");
 			return ResultCode.USB_GET_EPOUT_FAIL;
 		}
-		
+
 		return ret;
 	}
 	@Override
 	public int writeData(byte[] data, int len) {
 		// TODO Auto-generated method stub
 		// 发送数据判断是否成功
-				int ret = deviceConnection.bulkTransfer(epOut, data,len, timeOut* 1000);
-				Log.e(tg,"write ret is "+ret);
-				if (data.length != ret)
-				{
-					Log.e("transfer", "发送数据失败 :" + ret + " " + data.length + " " + (deviceConnection == null));
-					return ResultCode.USB_SEND_MESSSAGE_FAIL;
-				} else {
-					Log.e("transfer", "发送数据成功 :" + ret + " " + data.length + " " + (deviceConnection == null));
-				}
-				return ret;
+		int ret = deviceConnection.bulkTransfer(epOut, data,len, timeOut* 1000);
+		Log.e(tg,"write ret is "+ret);
+		if (data.length != ret)
+		{
+			Log.e("transfer", "发送数据失败 :" + ret + " " + data.length + " " + (deviceConnection == null));
+			return ResultCode.USB_SEND_MESSSAGE_FAIL;
+		} else {
+			Log.e("transfer", "发送数据成功 :" + ret + " " + data.length + " " + (deviceConnection == null));
+		}
+		return ret;
 	}
 
 	@Override
@@ -330,49 +330,47 @@ public class Device_HID implements DeviceIntf
 	public int readData(byte[] buffer, int timeOut) {
 		// TODO Auto-generated method stub
 		//发送数据前先清空通信信道
-		
-				int dataClearLen = -1;
-				int time = timeOut;
-			     isQuitRead = false;
-				while(true){
-					dataClearLen = deviceConnection.bulkTransfer(epIn, buffer, buffer.length, 1000);
-					if(dataClearLen>=0){
-						Log.e(tg,"readData len is "+dataClearLen);
-						break;
-					}else{
-						//Log.e(tg,"readData timeOut "+dataClearLen);
-						
-						try {
-							Thread.sleep(10);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-						
-						time--;
-						//break;
-					}
-					
-					if(time==0||isQuitRead){
-						break;
-					}
-					
+
+		int dataClearLen = -1;
+		int time = timeOut;
+		isQuitRead = false;
+		while(true){
+			dataClearLen = deviceConnection.bulkTransfer(epIn, buffer, buffer.length, 1000);
+			if(dataClearLen>=0){
+				Log.e(tg,"readData len is "+dataClearLen);
+				break;
+			}else{
+				//Log.e(tg,"readData timeOut "+dataClearLen);
+
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
-		
-				if(dataClearLen<0){
-					dataClearLen = 0;
-				}else{
-					
-				}
-				return dataClearLen;
-				
+
+
+				time--;
+				//break;
+			}
+
+			if(time==0||isQuitRead){
+				break;
+			}
+
+		}
+		if(dataClearLen<0){
+			dataClearLen = 0;
+		}else{
+
+		}
+		return dataClearLen;
+
 	}
 
 	@Override
 	public void setObject(Object object) {
-		
+
 	}
 
 	@Override
@@ -392,8 +390,6 @@ public class Device_HID implements DeviceIntf
 
 	@Override
 	public int readData2(byte[] buffer, int timeOut) {
-		// TODO Auto-generated method stub
-		return 0;
+		return readData(buffer, timeOut);
 	}
-	
 }
