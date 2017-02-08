@@ -46,10 +46,16 @@ public class FragmentTestIc extends FragmentBase {
 	private TextView mTextView1;
 	private TextView mTextView2, cardNo;
 
+	private EditText editText11, editText22;
+
 	private int mSucess = 0;
 	private int mFail = 0;
 	private int iIcFlag = 1;
 	public static final int IC_INFO	=1; 
+
+	private long time1 = System.currentTimeMillis();
+	private long time2 = System.currentTimeMillis();
+	private StringBuffer buffer = new StringBuffer();
 
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
 	{
@@ -61,6 +67,10 @@ public class FragmentTestIc extends FragmentBase {
 		readBtn 		=(Button) view.findViewById(R.id.readBtn);
 		cardNo 			=(TextView) view.findViewById(R.id.test_card_no);
 		etTimeOut		=(EditText)view.findViewById(R.id.et_IdTimeOut);
+
+		editText11		=(EditText)view.findViewById(R.id.et_IdTime11);
+		editText22		=(EditText)view.findViewById(R.id.et_IdTime22);
+
 		icCardData = new ICCardData();
 		readBtn.setOnClickListener(this);
 
@@ -92,11 +102,12 @@ public class FragmentTestIc extends FragmentBase {
 		switch(id)
 		{
 		case R.id.readBtn:
-			icCardData.list = null;
+			icCardData.list = "A000000333";
 			icCardData.cardStyle = iIcFlag;
 			icCardData.tag = "A";
 			icCardData.style = IC_INFO;
-			readTime = 10000;
+			readTime = Integer.parseInt(editText11.getText().toString());
+			buffer.setLength(0);
 			//			mainActivity.sendMessage(DeviceOperatorData.IDCARD,idCardData,time);
 			sendMessage();
 			break;
@@ -105,6 +116,7 @@ public class FragmentTestIc extends FragmentBase {
 
 	public void sendMessage()
 	{
+		time1 = System.currentTimeMillis();
 		if(readTime==0)return;
 		readTime--;
 		handler.sendEmptyMessageDelayed(0, 1000);
@@ -112,6 +124,15 @@ public class FragmentTestIc extends FragmentBase {
 
 	@Override
 	public void setData(Object data) {
+		time2 = System.currentTimeMillis();
+
+		long time = time2-time1;
+		String value = String.valueOf(time);
+		buffer.append(value);
+		buffer.append(",");
+
+		editText22.setText(buffer.toString());
+
 		String[] dataList = (String[])data;
 		String result = null;
 		if(!dataList[0].equals(sRight)){

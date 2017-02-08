@@ -70,6 +70,40 @@
                 android:inputType="number"
                 android:text="20" />
         </LinearLayout>
+        
+        <LinearLayout
+            style="@style/id_card_table_layout_style"
+            android:layout_weight="1" >
+
+            <TextView
+                style="@style/id_card_text_style"
+                android:layout_gravity="top"
+                android:text="测试次数：" />
+
+            <EditText
+                android:id="@+id/et_IdTime11"
+                style="@style/id_card_edit_style"
+                android:focusable="true"
+                android:inputType="number"
+                android:text="20" />
+        </LinearLayout>
+        
+        <LinearLayout
+            style="@style/id_card_table_layout_style"
+            android:layout_weight="1" >
+
+            <TextView
+                style="@style/id_card_text_style"
+                android:layout_gravity="top"
+                android:text="每次用时：" />
+
+            <EditText
+                android:id="@+id/et_IdTime22"
+                style="@style/id_card_edit_style"
+                android:focusable="true"
+                android:inputType="number"
+                android:text="" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/readBtn"

@@ -123,6 +123,11 @@ public class CommService {
 	{
 		return device.writeData(data,len);
 	}
+	
+	public boolean isWork(){
+		return device.isWork();
+	}
+	
 	/*
 	 * 写入数据
 	 */
@@ -137,6 +142,15 @@ public class CommService {
 	{
 
 		return device.readData(buffer, timeOut);
+	}
+	
+	/*
+	 * 读取数据
+	 */
+	public int readData2(byte[] buffer,int timeOut)
+	{
+
+		return device.readData2(buffer, timeOut);
 	}
 
 	public static  void destroyCommServer()

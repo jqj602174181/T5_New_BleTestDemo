@@ -480,4 +480,15 @@ public class Device_BT implements DeviceIntf
 		isQuitRead = true;
 	}
 
+	@Override
+	public boolean isWork() {
+		return false;
+	}
+
+	@Override
+	public int readData2(byte[] buffer, int timeOut) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

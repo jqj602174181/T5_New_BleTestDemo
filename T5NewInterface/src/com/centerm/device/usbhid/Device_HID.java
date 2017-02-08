@@ -372,20 +372,28 @@ public class Device_HID implements DeviceIntf
 
 	@Override
 	public void setObject(Object object) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getState() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void quitRead() {
-		// TODO Auto-generated method stub
 		isQuitRead = true;
+	}
+
+	@Override
+	public boolean isWork() {
+		return false;
+	}
+
+	@Override
+	public int readData2(byte[] buffer, int timeOut) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

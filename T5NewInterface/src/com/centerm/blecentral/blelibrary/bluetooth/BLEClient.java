@@ -165,7 +165,7 @@ public final class BLEClient implements DeviceIntf{
 					Log.e(TAG, "Discover Services failed");
 					return;
 				}
-				//				bluetoothGatt.requestMtu(120);
+				bluetoothGatt.requestMtu(500);
 				BluetoothGattService service = bluetoothGatt.getService(UUID.fromString(BLEProfile.UUID_SERVICE));
 				if (service != null) {
 					BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID.fromString(BLEProfile.UUID_CHARACTERISTIC));
@@ -334,22 +334,37 @@ public final class BLEClient implements DeviceIntf{
 
 		//循环等待获取数据,确保数据收完
 		int time = timeOut;
-		while(true){
-			if(mBuffer != null){
-				break;
-			}
+		while(mBuffer==null){
+			//			if(mBuffer != null){
+			//				break;
+			//			}
 
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			//			try {
+			//				Thread.sleep(100);
+			//			} catch (InterruptedException e) {
+			//				e.printStackTrace();
+			//			}
 
-			time -= 10;
-			Log.e("BLE", "time = in while: "+ time);
-			if(time <= 0){
-				return -2; //超时
-			}
+			//			time -= 10;
+			//			Log.e("BLE", "time = in while: "+ time);
+			//			if(time <= 0){
+			//				return -2; //超时
+			//			}
+		}
+
+		int i = 0;
+		for(; i<mBuffer.length; i++){ //数据拷贝
+			buffer[i] = mBuffer[i];
+		}
+
+		mBuffer = null;
+		return i;
+	}
+
+	@Override
+	public int readData2(byte[] buffer, int timeOut) {
+		while(mBuffer==null){
+			return -2; //超时
 		}
 
 		int i = 0;
@@ -379,5 +394,10 @@ public final class BLEClient implements DeviceIntf{
 	@Override
 	public void closeDevice() {
 
+	}
+
+	@Override
+	public boolean isWork() {
+		return onWrite;
 	}
 }

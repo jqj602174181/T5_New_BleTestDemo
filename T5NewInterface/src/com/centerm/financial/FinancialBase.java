@@ -66,9 +66,7 @@ public abstract class FinancialBase {
 
 	protected  int  readCommData(byte [] data,int time)
 	{
-
-
-		int length = CommService.getInstance().readData(data,time);
+		int length = CommService.getInstance().readData2(data,time);
 		return getRealReadedLength(data, length);
 	}
 
@@ -128,6 +126,11 @@ public abstract class FinancialBase {
 		}
 		// Log.e("transProc", "WriteDataToTransPort: success!");
 		//接收指令
+		
+		while(CommService.getInstance().isWork()){ //针对ble添加
+			
+		}
+		
 		if( szRes != null )
 		{
 			nRet = ReadDataFromTransPort( szRes, time);

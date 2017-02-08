@@ -28,6 +28,9 @@ public interface DeviceIntf {
 	 * 写入数据
 	 */
 	public int  writeData(byte[] data,int len);
+	
+	public boolean isWork();
+	
 	/*
 	 * 写入数据
 	 */
@@ -36,6 +39,11 @@ public interface DeviceIntf {
 	 * 读取数据
 	 */
 	public int readData(byte[] buffer,int timeOut);
+	
+	/*
+	 * 读取数据
+	 */
+	public int readData2(byte[] buffer,int timeOut);
 	
 	
 	public int getState();
