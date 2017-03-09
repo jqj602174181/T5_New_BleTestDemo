@@ -61,9 +61,6 @@ public class Sign extends FinancialBase {
 		}
 		byte[] readData = new byte[packLength];
 		while (true) {
-			while(CommService.getInstance().isWork()){ //针对ble添加
-
-			}
 			int len = ReadDataFromTransPort(readData,waitTimeOut);
 			int realLen = getRealReadedLength(readData, len);
 			if(isSuccess(realLen, readData)){
@@ -104,9 +101,6 @@ public class Sign extends FinancialBase {
 		}
 		int time = waitNumber;
 		while (true) {
-			while(CommService.getInstance().isWork()){ //针对ble添加
-
-			}
 			int len = ReadDataFromTransPort(readData,waitTimeOut);
 			int realLen = getRealReadedLength(readData, len);
 
@@ -221,9 +215,6 @@ public class Sign extends FinancialBase {
 			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
-		while(CommService.getInstance().isWork()){ //针对ble添加
-
 		}
 		nRet = ReadDataFromTransPort( byCmdRes, timeout);
 
@@ -369,9 +360,6 @@ public class Sign extends FinancialBase {
 			szCmdLen = getSignDataCmd(png_path, offset,ilenth, fileSize, szCmd );//构造指令
 			sendCommData(szCmd, szCmdLen);
 			//	//Log.e( TAG, "getpicSignFile: in while szCmd"+ StringUtil.bytesToHexString(szCmd));
-			while(CommService.getInstance().isWork()){ //针对ble添加
-
-			}
 			length =ReadDataFromTransPort(readData, timeOut);
 			//Log.e( TAG, "getpicSignFile: in while: realen=" + length);
 
@@ -440,9 +428,6 @@ public class Sign extends FinancialBase {
 				szCmdLen = getSignDataCmd(png_path, offset,ilenth, fileSize, szCmd );//构造指令
 				sendCommData(szCmd, szCmdLen);
 				//	Log.e( TAG, "xmlSignFile: in while szCmd"+ StringUtil.bytesToHexString(szCmd));
-				while(CommService.getInstance().isWork()){ //针对ble添加
-
-				}
 				length =ReadDataFromTransPort(readData, timeOut);
 				//Log.e( TAG, "xmlSignFile: in while: realen=" + length);
 				if(length>0){
@@ -551,9 +536,6 @@ public class Sign extends FinancialBase {
 		byte openData[] = getFinancialOpenCommad();
 		sendCommData(openData, openData.length);
 		byte[] readData = new byte[packLength];
-		while(CommService.getInstance().isWork()){ //针对ble添加
-
-		}
 		int length= ReadDataFromTransPort(readData,waitTimeOut);
 
 		byte[] tempDate = new byte[length];

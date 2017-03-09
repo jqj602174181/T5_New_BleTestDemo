@@ -124,10 +124,6 @@ public class CommService {
 		return device.writeData(data,len);
 	}
 	
-	public boolean isWork(){
-		return device.isWork();
-	}
-	
 	/*
 	 * Ğ´ÈëÊı¾İ
 	 */

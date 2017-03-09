@@ -12,6 +12,8 @@ import com.centerm.pin.Pin;
 import com.centerm.rdcard.Rdcard;
 import com.centerm.sign.Sign;
 import com.centerm.t5.util.dev.DeviceOperatorData;
+import com.centerm.testbigfile.TestBigFileDownload;
+import com.centerm.testcommand.TestCommand;
 
 public class FinancialServer {
 
@@ -27,6 +29,9 @@ public class FinancialServer {
 	private JRZIDcard mJrzIdcard;
 	private JRZICcard mJrzIccard;
 	private JRZMagcard mJrzMagcard;
+	
+	private TestCommand mTestCommand;
+	private TestBigFileDownload mTestBigFile;
 	
 	public FinancialServer()
 	{
@@ -116,6 +121,18 @@ public class FinancialServer {
 				mJrzIccard = new JRZICcard();
 			}
 			current= mJrzIccard;
+			break;
+		case DeviceOperatorData.TESTCOMMAND: //≤‚ ‘÷∏¡Ó
+			if(mTestCommand==null){
+				mTestCommand = new TestCommand();
+			}
+			current= mTestCommand;
+			break;
+		case DeviceOperatorData.TESTBIGFILE: //≤‚ ‘÷∏¡Ó
+			if(mTestBigFile==null){
+				mTestBigFile = new TestBigFileDownload();
+			}
+			current= mTestBigFile;
 			break;
 		default:
 			break;

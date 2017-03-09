@@ -39,7 +39,7 @@ import com.centerm.util.financial.SignData;
 	private boolean isSetWH =  false;
 	private TextView tvPassKeys;
 	private TextView tvState;
-	
+
 	private  String tag = "Signtest";
 	private static  int successtimes = 0;
 	private  static int  failtimes = 0;
@@ -61,16 +61,16 @@ import com.centerm.util.financial.SignData;
 		tvPassKeys		= (TextView)view.findViewById(R.id.tvPassKeys);
 		tvState			= (TextView)view.findViewById(R.id.tvKeyState);
 		btKeyAffuse		= (Button)view.findViewById(R.id.bt_signKeyAffuse);
-		
+
 		btKeyAffuse.setOnClickListener(this);
 		ReadInfo.setOnClickListener(this);
 		SignResult = (ImageView)view.findViewById(R.id.iv_img);//签名结果image
 		signData = new SignData();
-	
+
 		return view;
 	}
-	
-	
+
+
 	private void setImgWH()
 	{
 		/*
@@ -81,43 +81,43 @@ import com.centerm.util.financial.SignData;
 		int width = w>h?h:w;
 		SignResult.getLayoutParams().width = width;
 		SignResult.getLayoutParams().height = width;
-		*/
+		 */
 	}
 	class SpinnerSelectedListener implements OnItemSelectedListener{
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
-                long arg3) {
-        	String type = arg0.getItemAtPosition(position).toString();
-        	if (type == "DES") {
-        		passKeysRow.setVisibility(View.VISIBLE);
-        		passKeys.setText("1112131415161718");
-        		iEncryType = 2;
-        		Log.i("Sign","DES");
-        	} else if (type == "3DES") {
-        		passKeysRow.setVisibility(View.VISIBLE);
-        		passKeys.setText("11121314151617182122232425262728");
-        		iEncryType = 3;
-        		Log.i("Sign","3DES");
-        	} else if (type == "不加密") {
-        		passKeysRow.setVisibility(View.INVISIBLE);
-        		iEncryType = 1;
-        		Log.i("Sign","不加密");
-        	}
-        }
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
+				long arg3) {
+			String type = arg0.getItemAtPosition(position).toString();
+			if (type == "DES") {
+				passKeysRow.setVisibility(View.VISIBLE);
+				passKeys.setText("1112131415161718");
+				iEncryType = 2;
+				Log.i("Sign","DES");
+			} else if (type == "3DES") {
+				passKeysRow.setVisibility(View.VISIBLE);
+				passKeys.setText("11121314151617182122232425262728");
+				iEncryType = 3;
+				Log.i("Sign","3DES");
+			} else if (type == "不加密") {
+				passKeysRow.setVisibility(View.INVISIBLE);
+				iEncryType = 1;
+				Log.i("Sign","不加密");
+			}
+		}
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {
-			
+
 		}
 	}
-	
+
 	@Override
 	public void setData(Object data) {
 		String[] dataList = (String[])data;
 		if(!dataList[0].equals(sRight)){
-			
+
 			//failtimes++;
-		//	Log.e(tag, "failtimes=" + failtimes);
-			
+			//	Log.e(tag, "failtimes=" + failtimes);
+
 			if(signData.style==2){
 				tvState.setText(mainActivity.getErrorMsg(dataList[1]));
 			}else if(signData.style==1){
@@ -127,17 +127,17 @@ import com.centerm.util.financial.SignData;
 				}else{
 					etPath.setText(mainActivity.getErrorMsg(dataList[0]));
 				}
-			
+
 			}
-			
+
 			return;
 		}
-		
+
 		//successtimes++;
-		
-	//	Log.e(tag, "successtimes=" + successtimes);
+
+		//	Log.e(tag, "successtimes=" + successtimes);
 		if(signData.style==2){
-			
+
 			tvState.setText(success);
 			return;
 		}
@@ -145,60 +145,60 @@ import com.centerm.util.financial.SignData;
 			SignResult.setImageBitmap(null);
 			bmp.recycle();
 		}
-		
-		 etPath.setText(dataList[2]);
-		 bmp = BitmapFactory.decodeFile(dataList[1]);
-		 SignResult.setVisibility(View.VISIBLE);
-		 SignResult.setImageBitmap(bmp);
+
+		etPath.setText(dataList[2]);
+		bmp = BitmapFactory.decodeFile(dataList[1]);
+		SignResult.setVisibility(View.VISIBLE);
+		SignResult.setImageBitmap(bmp);
 		//bmp.recycle();
 	}
 
- //按钮控件
+	//按钮控件
 	@Override
 	public void onClick(View view) {
 		int id = view.getId();
 		switch(id)
 		{
-			case R.id.bt_elec_tag:
-				if(!isTimeOut(etTimeOut)){
-					return;
-				}
-				setImgWH();
-				signData.style = 1;//设置手写签名调用方式
-				int style =  DeviceOperatorData.SIGN;//手写签名模块选择
-				signData.timeOut = etTimeOut.getText().toString();//获取超时时间
-				int time = getTime(signData.timeOut)+60;
-				
-				//int j = 0;
-				//int  cnt =10;
-				
-				//for( j =0; j <cnt ; j++)
-				//{
-				   mainActivity.sendMessage(style,signData,time);
-					/*   try {
+		case R.id.bt_elec_tag:
+			if(!isTimeOut(etTimeOut)){
+				return;
+			}
+			setImgWH();
+			signData.style = 1;//设置手写签名调用方式
+			int style =  DeviceOperatorData.SIGN;//手写签名模块选择
+			signData.timeOut = etTimeOut.getText().toString();//获取超时时间
+			int time = getTime(signData.timeOut)+60;
+
+			//int j = 0;
+			//int  cnt =10;
+
+			//for( j =0; j <cnt ; j++)
+			//{
+			mainActivity.sendMessage(style,signData,time);
+			/*   try {
 						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				   
+
 				}*/
-				break;
-			case R.id.bt_signKeyAffuse:
-				signData.style =2;
-				String keyStr = tvPassKeys.getText().toString();
-				String tempStr = keyStr.replace(',', '@');
-				
-				String values[] = tempStr.split("@");
-				for(int i=0;i<values.length;i++){
-					//Log.e("value","value is "+values[i]);
-				}
-				signData.keyAffuseList =values;
-				mainActivity.sendMessage(DeviceOperatorData.SIGN,signData,-1);
-				break;
+			break;
+		case R.id.bt_signKeyAffuse:
+			signData.style =2;
+			String keyStr = tvPassKeys.getText().toString();
+			String tempStr = keyStr.replace(',', '@');
+
+			String values[] = tempStr.split("@");
+			for(int i=0;i<values.length;i++){
+				//Log.e("value","value is "+values[i]);
+			}
+			signData.keyAffuseList =values;
+			mainActivity.sendMessage(DeviceOperatorData.SIGN,signData,-1);
+			break;
 		}
 	}
-	
+
 	private byte[] valueToByte(String value)
 	{
 		byte index = (byte)30;

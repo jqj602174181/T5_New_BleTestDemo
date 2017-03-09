@@ -470,13 +470,7 @@ public class Device_BT implements DeviceIntf
 
 	@Override
 	public void quitRead() {
-		// TODO Auto-generated method stub
 		isQuitRead = true;
-	}
-
-	@Override
-	public boolean isWork() {
-		return false;
 	}
 
 	@Override

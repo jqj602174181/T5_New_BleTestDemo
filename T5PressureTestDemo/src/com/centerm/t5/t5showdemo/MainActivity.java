@@ -25,7 +25,7 @@ import com.centerm.t5.util.common.CommonUtil;
 import com.centerm.t5.util.dev.DeviceOperatorData;
 public class MainActivity extends Activity implements View.OnClickListener, OnMessageListener, IBLECallback {
 
-	private final int[] layoutIds={R.id.layout_connect, R.id.layout_Test1, R.id.layout_Test2};
+	private final int[] layoutIds={R.id.layout_connect, R.id.layout_Test1, R.id.layout_Test2, R.id.layout_Test3, R.id.layout_Test4};
 
 	private View[] viewList;
 	private View lastView;
@@ -40,6 +40,8 @@ public class MainActivity extends Activity implements View.OnClickListener, OnMe
 	private FragmentBase fragFingerprint;
 	private FragmentBase fragTestId;
 	private FragmentBase fragTestIc;
+	private FragmentBase fragTestCommand;
+	private FragmentBase fragTestBigFile;
 	private FragmentBlooth fragBlooth;
 
 	private FragmentBase currentFragment;
@@ -279,6 +281,18 @@ public class MainActivity extends Activity implements View.OnClickListener, OnMe
 				fragTestIc = new FragmentTestIc();
 			}
 			replaceFragemtn(fragTestIc);
+			break;
+		case R.id.layout_Test3:
+			if(fragTestCommand==null){
+				fragTestCommand = new FragmentTestCommand();
+			}
+			replaceFragemtn(fragTestCommand);
+			break;
+		case R.id.layout_Test4:
+			if(fragTestBigFile==null){
+				fragTestBigFile = new FragmentTestBigFile();
+			}
+			replaceFragemtn(fragTestBigFile);
 			break;
 			//		case R.id.layout_handwrite:
 			//

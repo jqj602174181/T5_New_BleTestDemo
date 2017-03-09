@@ -29,8 +29,6 @@ public interface DeviceIntf {
 	 */
 	public int  writeData(byte[] data,int len);
 	
-	public boolean isWork();
-	
 	/*
 	 * Ğ´ÈëÊı¾İ
 	 */

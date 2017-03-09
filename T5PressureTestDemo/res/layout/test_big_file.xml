@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        style="@style/id_card_table_layout_style"
+        android:layout_weight="1" >
+
+        <TextView
+            style="@style/id_card_text_style"
+            android:layout_gravity="top"
+            android:text="每次下载用时：" />
+
+        <EditText
+            android:id="@+id/et_IdTime22"
+            style="@style/id_card_edit_style"
+            android:focusable="true"
+            android:inputType="number"
+            android:text="" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/startBtn"
+        style="@style/bigButton"
+        android:layout_height="0dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:text="开始测试" />
+
+</LinearLayout>

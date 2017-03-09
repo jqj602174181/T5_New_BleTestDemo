@@ -384,11 +384,6 @@ public class Device_HID implements DeviceIntf
 	}
 
 	@Override
-	public boolean isWork() {
-		return false;
-	}
-
-	@Override
 	public int readData2(byte[] buffer, int timeOut) {
 		return readData(buffer, timeOut);
 	}

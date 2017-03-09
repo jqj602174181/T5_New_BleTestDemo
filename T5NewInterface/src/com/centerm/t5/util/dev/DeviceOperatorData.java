@@ -29,6 +29,8 @@ public class DeviceOperatorData {
 	public final static int SIGN			= 7;//手写签名
 	public final static int MAGCARD2        = 11;//磁卡
 	public final static int MAGCARD3        = 12;//磁卡
+	public final static int TESTCOMMAND     = 17;//测试指令
+	public final static int TESTBIGFILE     = 18;//大文件下载
 
 	public final static int JRZIDCARD 		= 13;//T5金融展 二代证
 	public final static int JRZICCARD 		= 14;//T5金融展 IC卡

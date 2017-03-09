@@ -70,18 +70,18 @@ public class FragmentICCard extends FragmentBase {
 		btnReadDetail.setOnClickListener(this);
 
 		spinner_type=(Spinner) view.findViewById(R.id.spinner_iccard_type);
-		
+
 		adapter=new ArrayAdapter<String>(getActivity(), R.layout.my_spinner_item,selectData);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_type.setAdapter(adapter);
-        spinner_type.setOnItemSelectedListener((OnItemSelectedListener) new SpinnerSelectedListener());
-        spinner_type.setVisibility(View.VISIBLE);
-        icCardData = new ICCardData();
-        lockObj = new Object();
-        setHandler();
+		spinner_type.setAdapter(adapter);
+		spinner_type.setOnItemSelectedListener((OnItemSelectedListener) new SpinnerSelectedListener());
+		spinner_type.setVisibility(View.VISIBLE);
+		icCardData = new ICCardData();
+		lockObj = new Object();
+		setHandler();
 		return view;
 	}
-	
+
 	private void setHandler()
 	{
 		handler = new Handler(){
@@ -92,14 +92,14 @@ public class FragmentICCard extends FragmentBase {
 			}
 		};
 	}
-	
+
 	private void sendMessage()
 	{
 		if(readTime==0)return;
 		readTime--;
 		handler.sendEmptyMessageDelayed(0, 2000);
 	}
-	
+
 	@Override
 	public void setData(Object data) {
 		/*
@@ -118,59 +118,59 @@ public class FragmentICCard extends FragmentBase {
 		}
 		long time = (endTime-currentTime)/1000;
 		switch (icCardData.style) {
-			case IC_INFO:
-		//		tv_ReadInfo.setText(result+","+useTime+time+second);
-				tv_ReadInfo.setText(result);
-				break;
-			case IC_ARQC:
-		//		tv_ReadARQC.setText(useTime+time+second+split+result);
-				tv_ReadARQC.setText(result);
-				break;
-			case IC_DETAIL:
-		//		tv_ReadDetail.setText(useTime+time+second+split+result);
-				tv_ReadDetail.setText(result);
-				break;
+		case IC_INFO:
+			//		tv_ReadInfo.setText(result+","+useTime+time+second);
+			tv_ReadInfo.setText(result);
+			break;
+		case IC_ARQC:
+			//		tv_ReadARQC.setText(useTime+time+second+split+result);
+			tv_ReadARQC.setText(result);
+			break;
+		case IC_DETAIL:
+			//		tv_ReadDetail.setText(useTime+time+second+split+result);
+			tv_ReadDetail.setText(result);
+			break;
 		default:
 			break;
 		}
 		//unLock();
 		sendMessage();
 	}
-	 //使用数组形式操作
-    class SpinnerSelectedListener implements OnItemSelectedListener{
- 
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
-                long arg3) {
-        	selectIndex = position;
-        	if(position==0){//接触式ic卡
-        		iIcFlag = 1;
-        	}else if(position==1){//"非接触式ic卡"
-        		iIcFlag = 2;
-        	}else if(position==2){//自动
-        		iIcFlag = 3;
-        	}
-        }
-        public void onNothingSelected(AdapterView<?> arg0) {
-        }
-    }
-	
-    private void lock()
-    {
-    	synchronized (lockObj) {
+	//使用数组形式操作
+	class SpinnerSelectedListener implements OnItemSelectedListener{
+
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
+				long arg3) {
+			selectIndex = position;
+			if(position==0){//接触式ic卡
+				iIcFlag = 1;
+			}else if(position==1){//"非接触式ic卡"
+				iIcFlag = 2;
+			}else if(position==2){//自动
+				iIcFlag = 3;
+			}
+		}
+		public void onNothingSelected(AdapterView<?> arg0) {
+		}
+	}
+
+	private void lock()
+	{
+		synchronized (lockObj) {
 			try {
 				lockObj.wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-    }
-    
-    private void unLock()
-    {
-    	synchronized (lockObj) {
+	}
+
+	private void unLock()
+	{
+		synchronized (lockObj) {
 			lockObj.notifyAll();
 		}
-    }
+	}
 	@Override
 	public void onClick(View view) {
 		if(!isTimeOut(etTimeOut)){
@@ -182,37 +182,37 @@ public class FragmentICCard extends FragmentBase {
 		currentTime = System.currentTimeMillis();
 		readTime = 0;
 		switch(id){
-			case R.id.Btn_ReadInfo:
-				
-		
-				tv_ReadInfo.setText("");
-				icCardData.list = etList.getText().toString();
-				icCardData.cardStyle = iIcFlag;
-				icCardData.tag = etTag.getText().toString().trim();
-				icCardData.style = IC_INFO;
-				style =  DeviceOperatorData.ICCARD1;
-				mainActivity.sendMessage(DeviceOperatorData.ICCARD1,icCardData,time);
-				
-				
-				break;
-			case R.id.Btn_ReadARQC:
-				tv_ReadARQC.setText("");
-				style =  DeviceOperatorData.ICCARD2;
-				icCardData.cardStyle = iIcFlag;
-				icCardData.style = IC_ARQC;
-				icCardData.ARQC = etARQC.getText().toString();
-				icCardData.list = etList.getText().toString();
-				mainActivity.sendMessage(DeviceOperatorData.ICCARD2,icCardData,time);
-				break;
-			case R.id.Btn_GetDetail:
-				tv_ReadDetail.setText("");
-				icCardData.list = etList.getText().toString();
-				icCardData.cardStyle = iIcFlag;
-				icCardData.style = IC_DETAIL;
-				mainActivity.sendMessage(DeviceOperatorData.ICCARD1,icCardData,time);
-				break;
+		case R.id.Btn_ReadInfo:
+
+
+			tv_ReadInfo.setText("");
+			icCardData.list = etList.getText().toString();
+			icCardData.cardStyle = iIcFlag;
+			icCardData.tag = etTag.getText().toString().trim();
+			icCardData.style = IC_INFO;
+			style =  DeviceOperatorData.ICCARD1;
+			mainActivity.sendMessage(DeviceOperatorData.ICCARD1,icCardData,time);
+
+
+			break;
+		case R.id.Btn_ReadARQC:
+			tv_ReadARQC.setText("");
+			style =  DeviceOperatorData.ICCARD2;
+			icCardData.cardStyle = iIcFlag;
+			icCardData.style = IC_ARQC;
+			icCardData.ARQC = etARQC.getText().toString();
+			icCardData.list = etList.getText().toString();
+			mainActivity.sendMessage(DeviceOperatorData.ICCARD2,icCardData,time);
+			break;
+		case R.id.Btn_GetDetail:
+			tv_ReadDetail.setText("");
+			icCardData.list = etList.getText().toString();
+			icCardData.cardStyle = iIcFlag;
+			icCardData.style = IC_DETAIL;
+			mainActivity.sendMessage(DeviceOperatorData.ICCARD1,icCardData,time);
+			break;
 		}
-	
+
 	}
-	
+
 }

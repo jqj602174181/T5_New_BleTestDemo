@@ -48,7 +48,7 @@ public final class ScanListAdapter extends BaseAdapter{
 		}else{
 			textView.setText(list.get(position).getDeviceName());
 		}
-		textView.setTextSize(25);
+		textView.setTextSize(20);
 		textView.setTextColor(Color.BLACK); 
 		return textView;
 	}

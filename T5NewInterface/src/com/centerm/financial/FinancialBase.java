@@ -125,12 +125,6 @@ public abstract class FinancialBase {
 			return ResultCode.DEVICE_WRITEDEVICE_FAILED;
 		}
 		// Log.e("transProc", "WriteDataToTransPort: success!");
-		//接收指令
-		
-		while(CommService.getInstance().isWork()){ //针对ble添加
-			
-		}
-		
 		if( szRes != null )
 		{
 			nRet = ReadDataFromTransPort( szRes, time);

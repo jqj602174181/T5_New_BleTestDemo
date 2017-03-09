@@ -40,7 +40,7 @@
             style="@style/left_operator_btn_style"
             android:text="压力测试（身份证）" />
     </LinearLayout>
-    
+
     <View style="@style/lineStyle" />
 
     <LinearLayout
@@ -56,4 +56,37 @@
             style="@style/left_operator_btn_style"
             android:text="压力测试（IC卡）" />
     </LinearLayout>
-</LinearLayout>
+
+    <View style="@style/lineStyle" />
+
+    <LinearLayout
+        android:id="@+id/layout_Test3"
+        style="@style/left_operator_layout_style" >
+
+        <ImageView
+            style="@style/left_operator_img_style"
+            android:src="@drawable/ic_card" />
+
+        <TextView
+            android:id="@+id/btn_Test"
+            style="@style/left_operator_btn_style"
+            android:text="指令测试" />
+    </LinearLayout>
+    
+    <View style="@style/lineStyle" />
+
+    <LinearLayout
+        android:id="@+id/layout_Test4"
+        style="@style/left_operator_layout_style" >
+
+        <ImageView
+            style="@style/left_operator_img_style"
+            android:src="@drawable/ic_card" />
+
+        <TextView
+            android:id="@+id/btn_Test_Big_File"
+            style="@style/left_operator_btn_style"
+            android:text="大数据文件下载测试" />
+    </LinearLayout>
+
+</LinearLayout>

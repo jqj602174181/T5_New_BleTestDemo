@@ -6,9 +6,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" >
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,21 +26,21 @@
                     android:id="@+id/rg_conn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/comm_marginLeft"
+                    android:layout_marginLeft="@dimen/x20"
                     android:checkedButton="@+id/b1_conn"
                     android:orientation="horizontal" >
 
                     <RadioButton
                         android:id="@+id/bt_conn"
                         style="@style/commm_text_style"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="@dimen/x20"
                         android:checked="true"
                         android:text="蓝牙" />
 
                     <RadioButton
                         android:id="@+id/ble_conn"
                         style="@style/commm_text_style"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="@dimen/x20"
                         android:text="BLE" />
 
                     <RadioButton
@@ -55,7 +53,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/comm_marginTop"
+                android:layout_marginTop="@dimen/y5"
                 android:orientation="horizontal"
                 android:visibility="gone" >
 
@@ -66,14 +64,14 @@
                 <TextView
                     android:id="@+id/tvUSBStat"
                     style="@style/commm_text_style"
-                    android:layout_marginLeft="@dimen/comm_marginLeft"
+                    android:layout_marginLeft="@dimen/x20"
                     android:text="未检测" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/comm_marginTop"
+                android:layout_marginTop="@dimen/y5"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -83,14 +81,14 @@
                 <TextView
                     android:id="@+id/tvBTStat"
                     style="@style/commm_text_style"
-                    android:layout_marginLeft="@dimen/comm_marginLeft"
+                    android:layout_marginLeft="@dimen/x20"
                     android:text="未检测" />
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/comm_marginTop"
+                android:layout_marginTop="@dimen/y5"
                 android:orientation="horizontal"
                 android:visibility="gone" >
 
@@ -101,62 +99,59 @@
                 <EditText
                     android:id="@+id/etMac"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="@dimen/comm_marginLeft"
-                    android:layout_marginRight="10dp"
+                    android:layout_height="@dimen/y50"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginRight="@dimen/x10"
                     android:background="@drawable/rounded_edittext_states"
                     android:inputType="text"
                     android:text="@string/macAddr"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btnMore"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="@dimen/y50"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="@dimen/x20" />
             </RelativeLayout>
 
             <Button
                 android:id="@+id/bt_conn_open"
                 style="@style/smallButton"
-                android:layout_marginLeft="200dp"
-                android:layout_marginTop="@dimen/comm_marginTop"
+                android:layout_marginLeft="@dimen/x200"
+                android:layout_marginTop="@dimen/y20"
                 android:text="连接" />
 
             <LinearLayout
                 android:id="@+id/secondBlock"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/y5"
                 android:orientation="vertical"
                 android:visibility="gone" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal" >
 
                     <Button
                         android:id="@+id/ble_find"
                         style="@style/smallButton"
-                        android:layout_width="100dp"
+                        android:layout_width="@dimen/x100"
                         android:text="搜索" />
 
                     <Button
                         android:id="@+id/ble_lianjie"
                         style="@style/smallButton"
-                        android:layout_width="100dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="@dimen/x20"
                         android:text="连接" />
 
                     <Button
                         android:id="@+id/ble_stop"
                         style="@style/smallButton"
-                        android:layout_width="200dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="@dimen/x20"
                         android:text="断开连接" />
                 </LinearLayout>
 
@@ -176,7 +171,7 @@
                             android:layout_height="wrap_content"
                             android:text="蓝牙mac："
                             android:textColor="@android:color/black"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/mac_value"
@@ -184,7 +179,7 @@
                             android:layout_height="wrap_content"
                             android:text="55:66:99:88:33:22"
                             android:textColor="@android:color/black"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
                     </LinearLayout>
 
                     <TextView
@@ -192,12 +187,12 @@
                         android:layout_height="wrap_content"
                         android:text="蓝牙列表："
                         android:textColor="@android:color/black"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
 
                     <ListView
                         android:id="@+id/list_scan_result"
-                        android:layout_width="350dp"
-                        android:layout_height="250dp">
+                        android:layout_width="@dimen/x300"
+                        android:layout_height="@dimen/y100" >
                     </ListView>
                 </LinearLayout>
             </LinearLayout>
